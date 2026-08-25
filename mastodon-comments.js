@@ -1,3 +1,12 @@
+/*
+ * Modified by Nube (2026)
+ * Based on the original project by dpecos under the GPL-3.0 license:
+ * https://github.com/dpecos/mastodon-comments
+ *
+ * Source code and modifications available at:
+ * https://github.com/nubesurrealista/mastodon-comments
+ */
+
 // ============================================================
 // Set language dependend texts
 // ============================================================
