@@ -14,10 +14,10 @@ const i18n = {
 		dialogCloseTitle: "Close",
 		dialogCloseSymbol: "&times;",
 		dialogExplain:
-			"Comments are powered by Mastodon. With an account on Mastodon (or elsewhere on the Fediverse), you can respond to this post. Simply enter your mastodon instance below, and add a reply:",
+			"Comments are powered by the Fediverse. With an account on Mastodon (or elsewhere on the Fediverse), you can respond to this post. Simply enter your Fediverse instance below, and add a reply:",
 		goButtonLabel: "Go",
 		copyAlternativeText:
-			"Alternatively, copy this URL and paste it into the search bar of your Mastodon app:",
+			"Alternatively, copy this URL and paste it into the search bar of your Fediverse app:",
 		copyButtonLabel: "Copy",
 		copiedButtonLabel: "Copied!",
 		instancePlaceholder: "mastodon.social",
@@ -72,7 +72,7 @@ const i18n = {
 		commentsTitle: "Comentarios",
 		replyIntro:
 			"Puedes usar tu cuenta del Fediverso (ej. Mastodon, entre otros) para comentar este",
-		replyLinkText: "toot",
+		replyLinkText: "post",
 		replyButtonLabel: "Responder",
 		loadingText: "Cargando comentarios del Fediverso...",
 		noCommentsText: "No se han encontrado comentarios",
@@ -80,13 +80,13 @@ const i18n = {
 		dialogCloseTitle: "Cerrar",
 		dialogCloseSymbol: "&times;",
 		dialogExplain:
-			"Comentarios gracias a Mastodon. Con una cuenta en Mastodon (o en cualquier otro sitio en el Fediverso), puedes responder a esta entrada. Simplemente introduce tu instancia y pulsa responder:",
+			"Comentarios gracias al Fediverso. Con una cuenta en Mastodon (o en cualquier otro sitio en el Fediverso), puedes responder a esta entrada. Simplemente introduce tu instancia y pulsa responder:",
 		goButtonLabel: "Ir",
 		copyAlternativeText:
-			"O puedes copiar esta URL y pegarla en el cuadro de búsqueda de tu aplicación Mastodon:",
+			"O puedes copiar esta URL y pegarla en el cuadro de búsqueda de tu aplicación fedi:",
 		copyButtonLabel: "Copiar",
 		copiedButtonLabel: "¡Copiado!",
-		instancePlaceholder: "mastodon.social",
+		instancePlaceholder: "instanciarealnofake.ejemplo",
 		instanceMissingAlert: "Por favor introduce tu instancia",
 		dateLocale: "es-ES",
 	},
@@ -94,259 +94,6 @@ const i18n = {
 
 const DEFAULT_LANG = "en";
 // ============================================================
-
-const styles = `
-:root {
-  --font-color: #5d686f;
-  --font-size: 1.0rem;
-
-  --block-border-width: 1px;
-  --block-border-radius: 3px;
-  --block-border-color: #ededf0;
-  --block-background-color: #f7f8f8;
-  --dialog-background-color: #ffffff;
-  --muted-color: #5d686f;
-  --reply-color: #003eaa;
-  --reblog-color: #8c8dff;
-  --favourite-color: #ca8f04;
-  --button-color: #595aff;
-  --button-hover-color: #4849ff;
-
-  --comment-indent: 40px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --font-color: #d1d1d1;
-    --block-border-color: #3e3e3e;
-    --block-background-color: #1e1e1e;
-    --dialog-background-color: #2d2d2d;
-    --muted-color: #8a9ba3;
-    --reply-color: #7b9fff;
-    --reblog-color: #a8a9ff;
-    --favourite-color: #e6b44a;
-    --button-color: #6c6dff;
-    --button-hover-color: #595aff;
-  }
-}
-
-[data-theme="dark"] {
-  --font-color: #d1d1d1;
-  --block-border-color: #3e3e3e;
-  --block-background-color: #1e1e1e;
-  --dialog-background-color: #2d2d2d;
-  --muted-color: #8a9ba3;
-  --reply-color: #7b9fff;
-  --reblog-color: #a8a9ff;
-  --favourite-color: #e6b44a;
-  --button-color: #6c6dff;
-  --button-hover-color: #595aff;
-}
-
-mastodon-comments {
-  font-size: var(--font-size);
-}
-
-p {
-  margin: 0 0 1rem 0;
-}
-
-#mastodon-stats {
-  text-align: center;
-  font-size: calc(var(--font-size) * 1.5);
-}
-
-#mastodon-title {
-  font-size: calc(var(--font-size) * 1.5);
-  font-weight: bold;
-}
-
-#mastodon-comments-list {
-  margin: 0 auto;
-  padding: 0;
-}
-
-#mastodon-comments-list ul {
-  padding-left: var(--comment-indent);
-}
-
-#mastodon-comments-list li {
-  list-style: none;
-}
-
-.mastodon-comment {
-  background-color: var(--block-background-color);
-  border-radius: var(--block-border-radius);
-  border: var(--block-border-width) var(--block-border-color) solid;
-  padding: 15px;
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  color: var(--font-color);
-}
-
-.mastodon-comment p {
-  margin-bottom: 0px;
-}
-
-.mastodon-comment .author {
-  padding-top:0;
-  display:flex;
-}
-
-.mastodon-comment .author a {
-  text-decoration: none;
-}
-
-.mastodon-comment .author .avatar img {
-  margin-right:1rem;
-  min-width:60px;
-  border-radius: 5px;
-}
-
-.mastodon-comment .author .details {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2em;
-}
-
-.mastodon-comment .author .details .name {
-  font-weight: bold;
-}
-
-.mastodon-comment .author .details .user {
-  color: var(--muted-color);
-  font-size: medium;
-}
-
-.mastodon-comment .author .date {
-  margin-left: auto;
-  font-size: small;
-}
-
-.mastodon-comment .content {
-  margin: 15px 0;
-  line-height: 1.5em;
-}
-
-.mastodon-comment .author .details a,
-.mastodon-comment .content p {
-  margin-bottom: 10px;
-}
-
-.mastodon-comment .attachments {
-  margin: 0px 10px;
-}
-
-.mastodon-comment .attachments > * {
-  margin: 0px 10px;
-}
-
-.mastodon-comment .attachments img {
-  max-width: 100%;
-}
-
-.mastodon-comment .status > div, #mastodon-stats > div {
-  display: inline-block;
-  margin-right: 15px;
-}
-
-.mastodon-comment .status a, #mastodon-stats a {
-  color: var(--muted-color);
-  text-decoration: none;
-}
-
-.mastodon-comment .status .replies.active a, #mastodon-stats .replies.active a {
-  color: var(--reply-color);
-}
-
-.mastodon-comment .status .reblogs.active a, #mastodon-stats .reblogs.active a {
-  color: var(--reblog-color);
-}
-
-.mastodon-comment .status .favourites.active a, #mastodon-stats .favourites.active a {
-  color: var(--favourite-color);
-}
-
-@media only screen and (max-width: 640px) {
-  .mastodon-comment .author {
-    flex-wrap: nowrap;
-    align-items: flex-start;
-  }
-
-  .mastodon-comment .author .date {
-    margin-left: 0;
-    text-align: right;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-  }
-}
-
-dialog {
-  border: none;
-  border-radius: var(--block-border-radius);
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  padding: 20px;
-  max-width: 500px;
-  width: 90%;
-  color: var(--font-color);
-  background-color: var(--dialog-background-color);
-}
-
-dialog::backdrop {
-  background: rgba(0,0,0,0.5);
-}
-
-dialog h3 {
-  margin-top: 0;
-}
-
-dialog #close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  background: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--font-color);
-}
-
-.input-row {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.input-row input {
-  flex-grow: 1;
-  padding: 8px;
-  border: 1px solid var(--block-border-color);
-  border-radius: var(--block-border-radius);
-  background-color: var(--block-background-color);
-  color: var(--font-color);
-}
-
-.button {
-  padding: 8px 16px;
-  background-color: var(--button-color);
-  color: white;
-  border: none;
-  border-radius: var(--block-border-radius);
-  cursor: pointer;
-}
-
-#add-comment {
-  display: block;
-  margin: 10px 0;
-}
-
-.button:hover {
-  background-color: var(--button-hover-color);
-}
-`;
 
 class MastodonComments extends HTMLElement {
 	constructor() {
@@ -377,17 +124,10 @@ class MastodonComments extends HTMLElement {
 			hour12: false,
 			formatMatcher: "basic",
 		});
-
-		if (!document.getElementById("mastodon-comments-styles")) {
-			const styleElem = document.createElement("style");
-			styleElem.id = "mastodon-comments-styles";
-			styleElem.innerHTML = styles;
-			document.head.appendChild(styleElem);
-		}
 	}
 
 	connectedCallback() {
-		this.mastodonPostUrl = `https://${this.host}/@${this.user}/${this.tootId}`;
+		this.mastodonPostUrl = `https://${this.host}/notes/${this.tootId}`;
 
 		this.innerHTML = `
 		  <div id="mastodon-stats"></div>
@@ -518,7 +258,7 @@ class MastodonComments extends HTMLElement {
 		  <div class="replies ${this.toot_active(toot, "replies")}">
 			<a href="${
 				toot.url
-			}" rel="ugc nofollow"><i class="fa fa-reply fa-fw"></i>${this.toot_count(
+			}" rel="ugc nofollow"><span class="stat-icon">↩</span>${this.toot_count(
 				toot,
 				"replies",
 			)}</a>
@@ -526,7 +266,7 @@ class MastodonComments extends HTMLElement {
 		  <div class="reblogs ${this.toot_active(toot, "reblogs")}">
 			<a href="${
 				toot.url
-			}/reblogs" rel="nofollow"><i class="fa fa-retweet fa-fw"></i>${this.toot_count(
+			}/reblogs" rel="nofollow"><span class="stat-icon">⇄</span>${this.toot_count(
 				toot,
 				"reblogs",
 			)}</a>
@@ -534,7 +274,7 @@ class MastodonComments extends HTMLElement {
 		  <div class="favourites ${this.toot_active(toot, "favourites")}">
 			<a href="${
 				toot.url
-			}/favourites" rel="nofollow"><i class="fa fa-star fa-fw"></i>${this.toot_count(
+			}/favourites" rel="nofollow"><span class="stat-icon">★</span>${this.toot_count(
 				toot,
 				"favourites",
 			)}</a>
@@ -555,7 +295,7 @@ class MastodonComments extends HTMLElement {
 		return this.dateFormatter
 			.format(new Date(dateString))
 			.replace(",", "")
-			.replace(/(\d+)\/(\d+)\/(\d+)/, "$3-$1-$2"); // only necessary when dealing with "en-US" locale
+			.replace(/(\d+)\/(\d+)\/(\d+)/, "$3-$1-$2");
 	}
 
 	async render_toots(toots, in_reply_to) {
@@ -589,7 +329,6 @@ class MastodonComments extends HTMLElement {
 			return isReplyToToot && !isFilteredOut;
 		};
 
-		// apply async filter and wait for all to finish
 		const tootsToRender = [];
 		await Promise.all(
 			toots.map(async (toot) => {
@@ -621,7 +360,7 @@ class MastodonComments extends HTMLElement {
 		  <article class="mastodon-comment">
 			<div class="author">
 			  <div class="avatar">
-			  	<a class="user" href="${
+				<a class="user" href="${
 					toot.account.url
 				}" rel="nofollow"><img src="${this.escapeHtml(
 					toot.account.avatar_static
